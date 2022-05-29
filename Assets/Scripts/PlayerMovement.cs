@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,8 +16,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.UpArrow)){
-            rb.velocity = new Vector2(jumpSpeed/3, jumpSpeed);
+        if(Input.GetKeyDown(KeyCode.UpArrow) ||
+            Input.GetKeyDown(KeyCode.Space) ||
+            Input.GetKeyDown(KeyCode.W))
+        {
+            rb.velocity = new Vector2(jumpSpeed/2, jumpSpeed);
         }
     }
 
@@ -29,6 +31,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         Destroy(gameObject);
-        Application.LoadLevel(Application.loadedLevel);
+        SceneManager.LoadScene("TitleScreen");
     }
 }
